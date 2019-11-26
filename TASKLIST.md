@@ -11,8 +11,9 @@
 	- [ ] underwater animal about to enter, surface of bubble near there changes color
 	- [ ] underwater animal in bubbled area, have their own bubble around head --> they can breathe
 	- [ ] sea creatures can enter in upper bubble area or ground. (dont see them til then in the bubble)
+	- [ ] trash falls down - pickup and "clean" with wand
 - [ ] win/lose
-	- [ ] enough points, win
+	- [ ] save/work with tagged animal - bubble increases a bit in size
 	- [ ] bubble closes before enough points, you die
 - [ ] earn points
 	- [ ] healing sick animals (+10)
