@@ -28,6 +28,11 @@
 	- [ ] score bar underneath timer
 
 
+## FOR ALPHA
+
+- [ ] get main interaction in place --> controller grabbing, bubble movement, etc. - just not fish interaction
+
+
 ## Initial Notes
 
 Main idea - still the same as before
