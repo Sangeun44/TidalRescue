@@ -1,10 +1,10 @@
 ## Task List
 
 - [ ] start game screen / space - rules section
-	- [ ] bubble machine - when game starts -> bubble pops out of it and can view sea world around you - and game starts (maybe move score / timer to above the bubble machine on the ground?)
+	- [x] bubble machine - when game starts -> bubble pops out of it and can view sea world around you - and game starts 
 - [ ] bubble
-	- [ ] decreases in size overtime
-	- [ ] initial size depends on initial height of hmd when game starts (matches height)
+	- [x] decreases in size overtime
+	- ~~[x] initial size depends on initial height of hmd when game starts (matches height)~~
 	- [ ] runs out you die. 
 	- [ ] leave the bubble area you die
 	- [ ] underwater animal enters bubble area, plays sound
@@ -22,10 +22,11 @@
 - [ ] controls
 	- [ ] left controller is grabber
 	- [ ] right controller is wand
-	- [ ] animal needs to be grabbed before can heal / gather data using wand
+	- [ ] swipe at animals with left / right hand. depending on what hand you hit with left vs right performs the action. must be appropriate for touched animal.
 - [ ] Additional Displays
 	- [ ] timer on bubble wall (static on bubble)
 	- [ ] score bar underneath timer
+	- [ ] maybe move score / timer to above the bubble machine on the ground?
 
 
 ## FOR ALPHA
