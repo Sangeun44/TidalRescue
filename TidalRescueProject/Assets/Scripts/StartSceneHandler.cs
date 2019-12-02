@@ -30,4 +30,16 @@ public class StartSceneHandler : MonoBehaviour
         // done need to add another state to state handler for here.
         // maybe just pass through pages of instructions??
     }
+
+    public void Reset()
+    {
+        start_button.SetActive(true);
+        tutorial_button.SetActive(true);
+    }
+
+    public void LeaveStartScene()
+    {
+        start_button.SetActive(false);
+        tutorial_button.SetActive(false);
+    }
 }

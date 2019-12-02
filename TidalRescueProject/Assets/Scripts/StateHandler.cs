@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
+
 
 public enum GameState
 {
@@ -14,41 +16,39 @@ public enum GameState
 
 public class StateHandler : MonoBehaviour
 {
-    GameState current_state;
+    public GameState current_state;
+    public ViveInput vive_input_left;
+    public ViveInput vive_input_right;
+
+    public MainGameHandler main_game;
+
+    public StartSceneHandler start_scene_handler;
 
     void Start()
     {
         current_state = GameState.STARTSCREEN;
-
-        var inputDevices = new List<UnityEngine.XR.InputDevice>();
-        UnityEngine.XR.InputDevices.GetDevices(inputDevices);
-
-        foreach (var device in inputDevices)
-        {
-            Debug.Log(string.Format("Device found with name '{0}' and role '{1}'", device.name, device.role.ToString()));
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // handle controllers interactions
-
-        // handle mouse interactions
-
-        //if (Input.GetKeyDown(KeyCode.
-
+        // handle interactions
 
         switch (current_state)
         {
             case GameState.STARTSCREEN:
-                //Debug.Log("STARTSCREEN");
+                if ((vive_input_left.colliding_object && vive_input_left.colliding_object.name == "StartBlock")
+                    || (vive_input_right.colliding_object && vive_input_right.colliding_object.name == "StartBlock"))
+                {
+                    SetState(GameState.PLAYING);
+                    Debug.Log("SET STATE TO GAMESTATE PLAYING");
+                }
                 break;
-            case GameState.TUTORIAL:
+            // case GameState.TUTORIAL:
                // Debug.Log("TUTORIAL");
-                break;
+               // break;
             case GameState.PLAYING:
-               // Debug.Log("PLAYING");
+                main_game.HandleEvents();
                 break;
             case GameState.GAMEOVER:
                // Debug.Log("GAMEOVER");
@@ -63,7 +63,35 @@ public class StateHandler : MonoBehaviour
     {
         // TODO: handle state changes appropriately
 
+        var old_state = current_state;
+        if (old_state == GameState.STARTSCREEN)
+        {
+            start_scene_handler.LeaveStartScene();
+        }
+
         // update to new state
         current_state = new_state;
+
+        switch (new_state)
+        {
+            case GameState.STARTSCREEN:
+                Debug.Log("SWITCHING TO : START SCREEN");
+                start_scene_handler.Reset();
+                break;
+            // case GameState.TUTORIAL:
+            // Debug.Log("TUTORIAL");
+            // break;
+            case GameState.PLAYING:
+                Debug.Log("SWITCHING TO : PLAYING");
+                main_game.SetUpGame();
+                break;
+            case GameState.GAMEOVER:
+                Debug.Log("SWITCHING TO : GAMEOVER");
+                main_game.Pause();
+                break;
+            default:
+                Debug.Log("Default case. ERROR: SHOULD NEVER HIT THIS.");
+                throw new System.Exception("Crashing application in state check for unexpected case.");
+        }
     }
 }
