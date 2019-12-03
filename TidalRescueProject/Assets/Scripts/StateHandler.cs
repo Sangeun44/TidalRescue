@@ -19,9 +19,9 @@ public class StateHandler : MonoBehaviour
     public GameState current_state;
     public ViveInput vive_input_left;
     public ViveInput vive_input_right;
+    public ViveInput hmd;
 
     public MainGameHandler main_game;
-
     public StartSceneHandler start_scene_handler;
 
     void Start()

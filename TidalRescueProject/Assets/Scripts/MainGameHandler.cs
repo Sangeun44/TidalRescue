@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class MainGameHandler : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class MainGameHandler : MonoBehaviour
 
     private bool _paused = false;
 
+    private int sick_points = 15;
+    private int tagged_points = 10;
+
     void Start()
     {
         SetUpGame();
@@ -36,20 +40,17 @@ public class MainGameHandler : MonoBehaviour
         _max_time_for_level = 500;
         points = 0;
         _max_points_for_level = 500;
-        Debug.Log("SETUP GAME");
         UnPause();
     }
 
     public void Pause()
     {
         _paused = true;
-        Debug.Log("PAUSED");
     }
 
     public void UnPause()
     {
         _paused = false;
-        Debug.Log("UNPAUSED");
     }
 
     // Update is called once per frame
@@ -59,6 +60,8 @@ public class MainGameHandler : MonoBehaviour
 
         ++_update_tick_timer;
 
+        CheckPlayerPos();
+
         if (_update_tick_timer % _timer_mod == 0)
         {
             ++game_timer;
@@ -66,23 +69,54 @@ public class MainGameHandler : MonoBehaviour
         }
     }
 
-    private void ShrinkBubble()
+    List<XRNodeState> nodeStatesCache = new List<XRNodeState>();
+    private void CheckPlayerPos()
+    {
+        // circle of bubble: 
+        // compare against center of sphere
+
+        InputTracking.GetNodeStates(nodeStatesCache);
+        Vector3 hmd_pos = new Vector3();
+        for (int i = 0; i < nodeStatesCache.Count; i++)
+        {
+            XRNodeState nodeState = nodeStatesCache[i];
+            if (nodeState.nodeType == XRNode.CenterEye)
+            {
+                nodeState.TryGetPosition(out hmd_pos);
+            }
+        }
+
+        if (Vector2.Distance( new Vector2(hmd_pos.x, hmd_pos.y), new Vector2(0, 0)) < bubble_visual.transform.localScale.x / 1.5)
+        {
+            // within - fine
+        } else
+        {
+            state_handler.SetState(GameState.GAMEOVER);
+        }
+    }
+
+    private void ShrinkBubbleByTime()
     {
         Vector3 temp_bubble_visual = bubble_visual.transform.localScale - _scale_reduction;
-        Debug.Log("TEMP BUBBLE VISUAL-------------------------------------------------------------");
-        Debug.Log(temp_bubble_visual);
         bubble_visual.transform.localScale = new Vector3(temp_bubble_visual.x,
                                                          temp_bubble_visual.y,
                                                          temp_bubble_visual.z);
     }
 
+    private void ShrinkBubble()
+    {
+        ShrinkBubbleByTime();
+
+        game_timer += 5;
+    }
+
     private void IncreaseBubble()
     {
-        // TODO - CALL THIS WHEN GOOD THINGS HAPPEN - timer also increases with this
         Vector3 temp_bubble_visual = bubble_visual.transform.localScale + _scale_reduction;
         bubble_visual.transform.localScale = new Vector3(temp_bubble_visual.x,
                                                          temp_bubble_visual.y,
                                                          temp_bubble_visual.z);
+        game_timer -= 5;
     }
 
     void HandleTimerUpdate()
@@ -99,7 +133,7 @@ public class MainGameHandler : MonoBehaviour
             state_handler.SetState(GameState.STARTSCREEN);
         }
 
-        ShrinkBubble();
+        ShrinkBubbleByTime();
     }
 
     public void HandleEvents()
@@ -107,12 +141,36 @@ public class MainGameHandler : MonoBehaviour
         ViveInput left = state_handler.vive_input_left;
         ViveInput right = state_handler.vive_input_right;
 
-        if ((left.colliding_object && left.colliding_object.name == "GenericSeaAnimal")
-              || (right.colliding_object && right.colliding_object.name == "GenericSeaAnimal"))
+        if (left.colliding_object && left.colliding_object.name.StartsWith("GenericSeaAnimal"))     
         {
-            // TODO: handle sea animal destruction properly
-
-            Debug.Log("(HEALED) OR (GOT INFO FROM TAGGED) GENERIC SEA ANIMAL");
+            if (left.colliding_object.GetComponent<AttributeType>() == AttributeType.TAGGED)
+            {
+                // researching with research hand:
+                IncreaseBubble();
+                points += tagged_points; // point value rep
+            }
+            else
+            {
+                // incorrect hand for the job
+                ShrinkBubble();
+                points -= sick_points; // point value rep
+            }
         }
+
+         if (right.colliding_object && right.colliding_object.name.StartsWith("GenericSeaAnimal"))
+         {
+            if (right.colliding_object.GetComponent<AttributeType>() == AttributeType.SICK)
+            {
+                // healing with healing hand:
+                IncreaseBubble();
+                points += sick_points; // point value rep
+            }
+            else
+            {
+                // incorrect hand for the job
+                ShrinkBubble();
+                points -= tagged_points; // point value rep
+            }
+         }
     }
 }
