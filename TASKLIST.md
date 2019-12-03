@@ -33,7 +33,14 @@
 
 ## FOR ALPHA
 
-- [ ] get main interaction in place --> controller grabbing, bubble movement, etc. - just not fish interaction
+- [x] get main interaction in place --> controller grabbing, bubble movement, etc. - just not fish interaction
+
+Todos - feedback:
+
+- [ ] maybe start bubble at smaller scale initially but move slower for decreasing size
+- [ ] when you click on a fish - correct? then good animation as fish disappears from scene (some visual indication of bubble change as well) - incorrect? then bad animation and -points sign / bubble increase color (some visual indication of this change)
+- [ ] readd back in bubble with double sided texture so have better visual of actual space (instead of just textured floor)
+
 
 
 ## Initial Notes
