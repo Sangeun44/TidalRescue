@@ -41,6 +41,9 @@ Todos - feedback:
 - [ ] when you click on a fish - correct? then good animation as fish disappears from scene (some visual indication of bubble change as well) - incorrect? then bad animation and -points sign / bubble increase color (some visual indication of this change)
 - [ ] readd back in bubble with double sided texture so have better visual of actual space (instead of just textured floor)
 
+- [ ] appropriate background noise & sound effects (hannah can find these)
+- [ ] myles/sang - add better assets - put score and timer visual in place - fix bug (ask hannah questions as needed)
+
 
 
 ## Initial Notes
