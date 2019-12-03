@@ -1,32 +1,34 @@
 ## Task List
 
-- [ ] start game screen / space - rules section
+- [x] start game screen / space - rules section
 	- [x] bubble machine - when game starts -> bubble pops out of it and can view sea world around you - and game starts 
 - [ ] bubble
 	- [x] decreases in size overtime
 	- ~~[x] initial size depends on initial height of hmd when game starts (matches height)~~
-	- [ ] runs out you die. 
-	- [ ] leave the bubble area you die
+	- [x] runs out you die. 
+	- [x] leave the bubble area you die
 	- [ ] underwater animal enters bubble area, plays sound
 	- [ ] underwater animal about to enter, surface of bubble near there changes color
 	- [ ] underwater animal in bubbled area, have their own bubble around head --> they can breathe
 	- [ ] sea creatures can enter in upper bubble area or ground. (dont see them til then in the bubble)
 	- [ ] trash falls down - pickup and "clean" with wand
-- [ ] win/lose
-	- [ ] save/work with tagged animal - bubble increases a bit in size
-	- [ ] bubble closes before enough points, you die
-- [ ] earn points
-	- [ ] healing sick animals (+10)
-	- [ ] gathering data from tagged animals (+20?) [fewer of these animals overall]
-	- [ ] gather data / heal incorrect animal (-15)
+- [x] win/lose
+	- [x] save/work with tagged animal - bubble increases a bit in size
+	- [x] bubble closes, you die
+- [x] earn points
+	- [x] healing sick animals (+10)
+	- [x] gathering data from tagged animals (+20?) [fewer of these animals overall]
+	- [x] gather data / heal incorrect animal (-15)
 - [ ] controls
-	- [ ] left controller is grabber
-	- [ ] right controller is wand
-	- [ ] swipe at animals with left / right hand. depending on what hand you hit with left vs right performs the action. must be appropriate for touched animal.
+	- [x] left controller is grabber
+	- [x] right controller is wand
+	- [x] swipe at animals with left / right hand. depending on what hand you hit with left vs right performs the action. must be appropriate for touched animal.
+	- [ ] visuals
 - [ ] Additional Displays
 	- [ ] timer on bubble wall (static on bubble)
 	- [ ] score bar underneath timer
 	- [ ] maybe move score / timer to above the bubble machine on the ground?
+	- [x] values for these displays
 
 
 ## FOR ALPHA
