@@ -143,7 +143,7 @@ public class MainGameHandler : MonoBehaviour
 
         if (left.colliding_object && left.colliding_object.name.StartsWith("GenericSeaAnimal"))     
         {
-            if (left.colliding_object.GetComponent<AttributeType>() == AttributeType.TAGGED)
+            if (left.colliding_object.tag == "TAGGED")
             {
                 // researching with research hand:
                 IncreaseBubble();
@@ -159,7 +159,7 @@ public class MainGameHandler : MonoBehaviour
 
          if (right.colliding_object && right.colliding_object.name.StartsWith("GenericSeaAnimal"))
          {
-            if (right.colliding_object.GetComponent<AttributeType>() == AttributeType.SICK)
+            if (right.colliding_object.tag == "SICK")
             {
                 // healing with healing hand:
                 IncreaseBubble();

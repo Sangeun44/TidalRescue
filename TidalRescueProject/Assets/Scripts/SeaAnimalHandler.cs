@@ -49,36 +49,48 @@ public class SeaAnimalHandler : MonoBehaviour
                 (AttributeType)(random.y * (float)AttributeType.NUM_ATTRIBUTETYPES)
             );
 
+            //ranrandom location
+            int random_int1 = Random.Range(0, 5);
+            int random_int2 = Random.Range(3, 5);
+            int random_int3 = Random.Range(5, 5);
+            Vector3 position = new Vector3(random_int1, random_int2, random_int3);
+
             switch (temp.animal_type)
             {
                 case AnimalType.FISH:
                     if (temp.attribute_type == AttributeType.SICK)
                     {
-                        temp.visual = GameObject.Instantiate(sickFish, new Vector3(1, 1, 0), Quaternion.identity);
+                        temp.visual = GameObject.Instantiate(sickFish, position, Quaternion.identity);
+                        temp.gameObject.tag = "SICK";
                     }
                     else if (temp.attribute_type == AttributeType.TAGGED)
                     {
-                        temp.visual = GameObject.Instantiate(taggedFish, new Vector3(1, 1, 0), Quaternion.identity);
+                        temp.visual = GameObject.Instantiate(taggedFish, position, Quaternion.identity);
+                        temp.gameObject.tag = "TAGGED";
                     }
                     break;
                 case AnimalType.TURTLE:
                     if (temp.attribute_type == AttributeType.SICK)
                     {
-                        temp.visual = GameObject.Instantiate(sickTurtle, new Vector3(1, 1, 0), Quaternion.identity);
+                        temp.visual = GameObject.Instantiate(sickTurtle, position, Quaternion.identity);
+                        temp.gameObject.tag = "SICK";
                     }
                     else if (temp.attribute_type == AttributeType.TAGGED)
                     {
-                        temp.visual = GameObject.Instantiate(taggedTurtle, new Vector3(1, 1, 0), Quaternion.identity);
+                        temp.visual = GameObject.Instantiate(taggedTurtle, position, Quaternion.identity);
+                        temp.gameObject.tag = "TAGGED";
                     }
                     break;
                 case AnimalType.CRAB:
                     if (temp.attribute_type == AttributeType.SICK)
                     {
-                        temp.visual = GameObject.Instantiate(sickCrab, new Vector3(1, 1, 0), Quaternion.identity);
+                        temp.visual = GameObject.Instantiate(sickCrab, position, Quaternion.identity);
+                        temp.gameObject.tag = "SICK";
                     }
                     else if (temp.attribute_type == AttributeType.TAGGED)
                     {
-                        temp.visual = GameObject.Instantiate(taggedCrab, new Vector3(1, 1, 0), Quaternion.identity);
+                        temp.visual = GameObject.Instantiate(taggedCrab, position, Quaternion.identity);
+                        temp.gameObject.tag = "TAGGED";
                     }
                     break;
                 default:

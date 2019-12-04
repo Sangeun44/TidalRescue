@@ -15,6 +15,7 @@ public class SeaAnimal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
     }
     
     public void Setup(AnimalType animal, AttributeType attribute)
