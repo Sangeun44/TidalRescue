@@ -41,9 +41,18 @@ public class SeaAnimalHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A)) {
+            spawnMod -= 5;
+            Debug.Log("FASTER!!!!!!");
+        }
+        if (Input.GetKeyDown(KeyCode.S)) {
+            spawnMod += 10;
+            Debug.Log("SLOWER!!!!!!!!");
+        }
+
         if (main_game_handler.game_timer % spawnMod == 0)
         {
-            Debug.Log("game spawning animals");
+            //Debug.Log("game spawning animals");
             // add new sea animal
             Vector2 random = Random.insideUnitCircle;
             SeaAnimal temp = new SeaAnimal(); //create new sea animal

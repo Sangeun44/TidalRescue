@@ -66,6 +66,15 @@ public class MainGameHandler : MonoBehaviour
 
         CheckPlayerPos();
 
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            _scale_reduction *= 0.5f;
+            Debug.Log("SMALLER!SMALLER!SMALLER!SMALLER!SMALLER!SMALLER!SMALLER!SMALLER!");
+        }
+        if (Input.GetKeyDown(KeyCode.W)) {
+            _scale_reduction *= 2.0f;
+            Debug.Log("BIGGER!BIGGER!BIGGER!BIGGER!BIGGER!BIGGER!BIGGER!BIGGER!");
+        }
+
         if (_update_tick_timer % _timer_mod == 0)
         {
             ++game_timer;
@@ -102,6 +111,8 @@ public class MainGameHandler : MonoBehaviour
     private void ShrinkBubbleByTime()
     {
         Debug.Log("Shrink");
+        
+        //Debug.Log("BIGGER!");
         Vector3 temp_bubble_visual = bubble_visual.transform.localScale - _scale_reduction;
         bubble_visual.transform.localScale = new Vector3(temp_bubble_visual.x,
                                                          temp_bubble_visual.y,

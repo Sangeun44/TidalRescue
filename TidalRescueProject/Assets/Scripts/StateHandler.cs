@@ -52,7 +52,7 @@ public class StateHandler : MonoBehaviour
                // break;
             case GameState.PLAYING:
                 main_game.HandleEvents();
-                Debug.Log("playing");
+                //Debug.Log("playing");
                 break;
             case GameState.GAMEOVER:
                // Debug.Log("GAMEOVER");
