@@ -5,6 +5,8 @@ using UnityEngine.XR;
 
 public class MainGameHandler : MonoBehaviour
 {
+    public TextMesh gtext;
+
     private int _max_time_for_level = 500;
     private int _max_points_for_level = 500;
 
@@ -56,6 +58,8 @@ public class MainGameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        state_handler.gtext.text = (_max_time_for_level - game_timer).ToString();
+
         if (_paused) { return; } 
 
         ++_update_tick_timer;
