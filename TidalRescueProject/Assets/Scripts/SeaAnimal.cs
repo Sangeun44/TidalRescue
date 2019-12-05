@@ -29,5 +29,7 @@ public class SeaAnimal : MonoBehaviour
     {
         // MOVE RANDOMLY
         visual.transform.position += new Vector3(1, 1, 1);
+        Debug.Log("A");
+        Debug.Log(visual.transform.position.x + " " + visual.transform.position.y + " " + visual.transform.position.z);
     }
 }

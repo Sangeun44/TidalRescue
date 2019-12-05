@@ -43,54 +43,63 @@ public class SeaAnimalHandler : MonoBehaviour
         {
             // add new sea animal
             Vector2 random = Random.insideUnitCircle;
-            SeaAnimal temp = new SeaAnimal();
+
+            SeaAnimal temp = new SeaAnimal(); //create new sea animal
+
+            //set up sea animal
             temp.Setup(
-                (AnimalType)(random.x * (float)AnimalType.NUM_ANIMALTYPES),
+                (AnimalType)(random.x * (float)AnimalType.NUM_ANIMALTYPES), 
                 (AttributeType)(random.y * (float)AttributeType.NUM_ATTRIBUTETYPES)
             );
 
-            //ranrandom location
+            //random location
             int random_int1 = Random.Range(0, 5);
-            int random_int2 = Random.Range(3, 5);
-            int random_int3 = Random.Range(5, 5);
-            Vector3 position = new Vector3(random_int1, random_int2, random_int3);
+            int random_int2 = Random.Range(0, 5);
+            int random_int3 = Random.Range(0, 5);
+            //Debug.Log(random_int1 + " " + random_int2 + " " + random_int3);
 
             switch (temp.animal_type)
             {
                 case AnimalType.FISH:
                     if (temp.attribute_type == AttributeType.SICK)
                     {
-                        temp.visual = GameObject.Instantiate(sickFish, position, Quaternion.identity);
-                        temp.gameObject.tag = "SICK";
+                        Vector3 position = new Vector3(random_int1, random_int2, random_int3);
+                        temp.visual = Instantiate(sickFish, position, Quaternion.identity);
+                        temp.visual.gameObject.tag = "SICK";
                     }
                     else if (temp.attribute_type == AttributeType.TAGGED)
                     {
-                        temp.visual = GameObject.Instantiate(taggedFish, position, Quaternion.identity);
-                        temp.gameObject.tag = "TAGGED";
+                        Vector3 position = new Vector3(random_int1, random_int2, random_int3);
+                        temp.visual = Instantiate(taggedFish, position, Quaternion.identity);
+                        temp.visual.gameObject.tag = "TAGGED";
                     }
                     break;
                 case AnimalType.TURTLE:
                     if (temp.attribute_type == AttributeType.SICK)
                     {
-                        temp.visual = GameObject.Instantiate(sickTurtle, position, Quaternion.identity);
-                        temp.gameObject.tag = "SICK";
+                        Vector3 position = new Vector3(random_int1, random_int2, random_int3);
+                        temp.visual = Instantiate(sickTurtle, position, Quaternion.identity);
+                        temp.visual.gameObject.tag = "SICK";
                     }
                     else if (temp.attribute_type == AttributeType.TAGGED)
                     {
-                        temp.visual = GameObject.Instantiate(taggedTurtle, position, Quaternion.identity);
-                        temp.gameObject.tag = "TAGGED";
+                        Vector3 position = new Vector3(random_int1, random_int2, random_int3);
+                        temp.visual = Instantiate(taggedTurtle, position, Quaternion.identity);
+                        temp.visual.gameObject.tag = "TAGGED";
                     }
                     break;
                 case AnimalType.CRAB:
                     if (temp.attribute_type == AttributeType.SICK)
                     {
-                        temp.visual = GameObject.Instantiate(sickCrab, position, Quaternion.identity);
-                        temp.gameObject.tag = "SICK";
+                        Vector3 position = new Vector3(random_int1, 0, random_int3);
+                        temp.visual = Instantiate(sickCrab, position, Quaternion.identity);
+                        temp.visual.gameObject.tag = "SICK";
                     }
                     else if (temp.attribute_type == AttributeType.TAGGED)
                     {
-                        temp.visual = GameObject.Instantiate(taggedCrab, position, Quaternion.identity);
-                        temp.gameObject.tag = "TAGGED";
+                        Vector3 position = new Vector3(random_int1, 0, random_int3);
+                        temp.visual = Instantiate(taggedCrab, position, Quaternion.identity);
+                        temp.visual.gameObject.tag = "TAGGED";
                     }
                     break;
                 default:
