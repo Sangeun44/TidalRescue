@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Valve.VR;
-
 
 public enum GameState
 {
@@ -16,6 +16,8 @@ public enum GameState
 
 public class StateHandler : MonoBehaviour
 {
+    public TextMesh gtext;
+
     public GameState current_state;
     public ViveInput vive_input_left;
     public ViveInput vive_input_right;
@@ -90,6 +92,7 @@ public class StateHandler : MonoBehaviour
             case GameState.GAMEOVER:
                 Debug.Log("SWITCHING TO : GAMEOVER");
                 main_game.Pause();
+                gtext.text = "GAME-OVER";
                 break;
             default:
                 Debug.Log("Default case. ERROR: SHOULD NEVER HIT THIS.");
