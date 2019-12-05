@@ -10,7 +10,7 @@ public class StartSceneHandler : MonoBehaviour
     public StateHandler state_handler;
 
     void Start()
-    {   
+    {
     }
 
     // Update is called once per frame
@@ -21,6 +21,7 @@ public class StartSceneHandler : MonoBehaviour
 
     void StartPressed()
     {
+        Debug.Log("start press");
         state_handler.SetState(GameState.PLAYING);
     }
 

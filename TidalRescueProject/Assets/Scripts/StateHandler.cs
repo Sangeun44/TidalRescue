@@ -36,6 +36,7 @@ public class StateHandler : MonoBehaviour
 
         switch (current_state)
         {
+            //if player touches the block
             case GameState.STARTSCREEN:
                 if ((vive_input_left.colliding_object && vive_input_left.colliding_object.name == "StartBlock")
                     || (vive_input_right.colliding_object && vive_input_right.colliding_object.name == "StartBlock"))
@@ -49,6 +50,7 @@ public class StateHandler : MonoBehaviour
                // break;
             case GameState.PLAYING:
                 main_game.HandleEvents();
+                Debug.Log("playing");
                 break;
             case GameState.GAMEOVER:
                // Debug.Log("GAMEOVER");

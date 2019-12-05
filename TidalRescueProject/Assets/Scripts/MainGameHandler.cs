@@ -97,6 +97,7 @@ public class MainGameHandler : MonoBehaviour
 
     private void ShrinkBubbleByTime()
     {
+        Debug.Log("Shrink");
         Vector3 temp_bubble_visual = bubble_visual.transform.localScale - _scale_reduction;
         bubble_visual.transform.localScale = new Vector3(temp_bubble_visual.x,
                                                          temp_bubble_visual.y,
