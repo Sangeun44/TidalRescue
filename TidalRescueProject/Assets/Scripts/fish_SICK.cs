@@ -7,13 +7,15 @@ using UnityEngine;
 public class fish_SICK : MonoBehaviour
 {
     public int point_value;
-
     public int speed;
+    public bool came_close;
 
     // Start is called before the first frame update
     void Start()
     {
-        speed = 3;
+        speed = 2;
+        came_close = false;
+
     }
 
     public void Setup(AnimalType animal, AttributeType attribute)
@@ -23,25 +25,30 @@ public class fish_SICK : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //random location
+
+        //float step = speed * Time.deltaTime;
+        //transform.position = Vector3.MoveTowards(transform.position, new Vector3(random_int1, random_int2, random_int3), step);
+        //random location
+        float step = speed * Time.deltaTime;
+
         // MOVE RANDOMLY
         //transform.position += new Vector3(1, 1, 1);
-        if (transform.position != new Vector3(0, 0, 0))
+        if (transform.position.y > 0.5 && !came_close)
         {
             //if fish is far, move it towars the player
-            float step = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0, 0), step);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(Random.Range(-1, 1), Random.Range(0, 1), Random.Range(-1, 1)), step);
         }
-        else if (transform.position == new Vector3(0, 0, 0))
+        else if (transform.position.y <= 0.5 && !came_close)
         {
             //if the fish is at the player, keep it moving
-            float step = speed * Time.deltaTime;
-            transform.position += transform.forward * Time.deltaTime * speed;
-        } else {
-            //if fish is out of bouns estroy
-
+            Debug.Log("I AM HERE!");
+            came_close = true;
         }
-
-        //Debug.Log("A");
-        //Debug.Log(transform.position.x + " " + transform.position.y + " " + transform.position.z);
+        else if (came_close)
+        {
+            //if fish is out of bouns estroy
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(Random.Range(-50, 50), Random.Range(10, 50), Random.Range(-50, 50)), step);
+        }
     }
 }

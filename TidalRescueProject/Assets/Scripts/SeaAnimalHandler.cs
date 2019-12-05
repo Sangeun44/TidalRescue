@@ -55,9 +55,9 @@ public class SeaAnimalHandler : MonoBehaviour
             );
 
             //random location
-            int random_int1 = Random.Range(-50, 50);
-            int random_int2 = Random.Range(0, 50);
-            int random_int3 = Random.Range(-50, 50);
+            int random_int1 = Random.Range(-20, 20);
+            int random_int2 = Random.Range(0, 20);
+            int random_int3 = Random.Range(-20, 20);
             //Debug.Log(random_int1 + " " + random_int2 + " " + random_int3);
 
             switch (temp.animal_type)
