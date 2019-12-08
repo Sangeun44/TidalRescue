@@ -88,6 +88,7 @@ public class StateHandler : MonoBehaviour
             case GameState.PLAYING:
                 Debug.Log("SWITCHING TO : PLAYING");
                 main_game.SetUpGame();
+                main_game.game_started = true;
                 break;
             case GameState.GAMEOVER:
                 Debug.Log("SWITCHING TO : GAMEOVER");

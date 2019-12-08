@@ -11,15 +11,16 @@ public class MainGameHandler : MonoBehaviour
     private int _max_points_for_level = 500;
 
     // do not reduce vertical so person still has room to stand
-    private Vector3 _scale_reduction = new Vector3(0.5f, 0.5f, 0.5f);
+    private Vector3 _scale_reduction = new Vector3(0.01f, 0.01f, 0.01f);
 
     public GameObject bubble_visual;
     public StateHandler state_handler;
 
     private int _update_tick_timer = 0; // ticked every update. used for modding game_timer
-    private int _timer_mod = 30;
+    private int _timer_mod = 100;
 
     public int game_timer = 0;
+    public bool game_started = false;
     public int points = 0;
 
     private bool _paused = false;
@@ -65,15 +66,6 @@ public class MainGameHandler : MonoBehaviour
         ++_update_tick_timer;
 
         CheckPlayerPos();
-
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            _scale_reduction *= 0.5f;
-            Debug.Log("SMALLER!SMALLER!SMALLER!SMALLER!SMALLER!SMALLER!SMALLER!SMALLER!");
-        }
-        if (Input.GetKeyDown(KeyCode.W)) {
-            _scale_reduction *= 2.0f;
-            Debug.Log("BIGGER!BIGGER!BIGGER!BIGGER!BIGGER!BIGGER!BIGGER!BIGGER!");
-        }
 
         if (_update_tick_timer % _timer_mod == 0)
         {
@@ -157,36 +149,36 @@ public class MainGameHandler : MonoBehaviour
         ViveInput left = state_handler.vive_input_left;
         ViveInput right = state_handler.vive_input_right;
 
-        if (left.colliding_object && left.colliding_object.name.StartsWith("GenericSeaAnimal"))     
-        {
-            if (left.colliding_object.tag == "TAGGED")
-            {
-                // researching with research hand:
-                IncreaseBubble();
-                points += tagged_points; // point value rep
-            }
-            else
-            {
-                // incorrect hand for the job
-                ShrinkBubble();
-                points -= sick_points; // point value rep
-            }
-        }
+        // if (left.colliding_object)     
+        // {
+        //     if (left.colliding_object.tag == "TAGGED")
+        //     {
+        //         // researching with research hand:
+        //         IncreaseBubble();
+        //         points += tagged_points; // point value rep
+        //     }
+        //     else
+        //     {
+        //         // incorrect hand for the job
+        //         ShrinkBubble();
+        //         points -= sick_points; // point value rep
+        //     }
+        // }
 
-         if (right.colliding_object && right.colliding_object.name.StartsWith("GenericSeaAnimal"))
-         {
-            if (right.colliding_object.tag == "SICK")
-            {
-                // healing with healing hand:
-                IncreaseBubble();
-                points += sick_points; // point value rep
-            }
-            else
-            {
-                // incorrect hand for the job
-                ShrinkBubble();
-                points -= tagged_points; // point value rep
-            }
-         }
+        //  if (right.colliding_object)
+        //  {
+        //     if (right.colliding_object.tag == "SICK")
+        //     {
+        //         // healing with healing hand:
+        //         IncreaseBubble();
+        //         points += sick_points; // point value rep
+        //     }
+        //     else
+        //     {
+        //         // incorrect hand for the job
+        //         ShrinkBubble();
+        //         points -= tagged_points; // point value rep
+        //     }
+        //  }
     }
 }

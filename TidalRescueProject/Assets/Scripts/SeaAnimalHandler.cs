@@ -32,7 +32,7 @@ public class SeaAnimalHandler : MonoBehaviour
     public GameObject sickCrab;
     public GameObject taggedCrab;
 
-    private int spawnMod = 30; // every 5 seconds.
+    private int spawnMod =20; // every 5 seconds.
 
     void Start()
     {
@@ -41,20 +41,14 @@ public class SeaAnimalHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A)) {
-            spawnMod -= 5;
-            Debug.Log("FASTER!!!!!!");
-        }
-        if (Input.GetKeyDown(KeyCode.S)) {
-            spawnMod += 10;
-            Debug.Log("SLOWER!!!!!!!!");
-        }
 
-        if (main_game_handler.game_timer % spawnMod == 0)
+        if (main_game_handler.game_timer % spawnMod == 0 && main_game_handler.game_started)
         {
-            //Debug.Log("game spawning animals");
+            Debug.Log("game spawning animals");
+
             // add new sea animal
             Vector2 random = Random.insideUnitCircle;
+            Debug.Log(random);
             SeaAnimal temp = new SeaAnimal(); //create new sea animal
 
             ////set up sea animal
@@ -64,9 +58,7 @@ public class SeaAnimalHandler : MonoBehaviour
             );
 
             //random location
-            int random_int1 = Random.Range(-10, 10);
-            int random_int2 = Random.Range(0, 10);
-            int random_int3 = Random.Range(-10, 10);
+ 
             //Debug.Log(random_int1 + " " + random_int2 + " " + random_int3);
 
             switch (temp.animal_type)
@@ -75,14 +67,14 @@ public class SeaAnimalHandler : MonoBehaviour
                     if (temp.attribute_type == AttributeType.SICK)
                     {
                         //sick fish  
-                        Vector3 position = new Vector3(random_int1, random_int2, random_int3);
+                        Vector3 position = new Vector3(random.x * 20, 1, random.y * 20);
                         GameObject fish_sick = Instantiate(sickFish, position, Quaternion.identity);
                         fish_sick.gameObject.tag = "SICK";
                     }
                     else if (temp.attribute_type == AttributeType.TAGGED)
                     {
                         //tagge fish
-                        Vector3 position = new Vector3(random_int1, random_int2, random_int3);
+                        Vector3 position = new Vector3(random.x * 20, 1, random.y *20);
                         GameObject fish_tag = Instantiate(taggedFish, position, Quaternion.identity);
                         fish_tag.gameObject.tag = "TAGGED";
                     }

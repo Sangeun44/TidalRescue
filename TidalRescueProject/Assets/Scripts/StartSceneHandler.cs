@@ -35,12 +35,12 @@ public class StartSceneHandler : MonoBehaviour
     public void Reset()
     {
         start_button.SetActive(true);
-        tutorial_button.SetActive(true);
+        // tutorial_button.SetActive(true);
     }
 
     public void LeaveStartScene()
     {
         start_button.SetActive(false);
-        tutorial_button.SetActive(false);
+        // tutorial_button.SetActive(false);
     }
 }
