@@ -6,18 +6,20 @@ using UnityEngine.XR;
 public class MainGameHandler : MonoBehaviour
 {
     public TextMesh gtext;
+    public TextMesh score_text;
+    public static int score = 0;
 
     private int _max_time_for_level = 500;
     private int _max_points_for_level = 500;
 
     // do not reduce vertical so person still has room to stand
-    private Vector3 _scale_reduction = new Vector3(0.01f, 0.01f, 0.01f);
+    private Vector3 _scale_reduction = new Vector3(0.1f, 0.1f, 0.1f);
 
     public GameObject bubble_visual;
     public StateHandler state_handler;
 
     private int _update_tick_timer = 0; // ticked every update. used for modding game_timer
-    private int _timer_mod = 100;
+    private int _timer_mod = 30;
 
     public int game_timer = 0;
     public bool game_started = false;
@@ -40,7 +42,7 @@ public class MainGameHandler : MonoBehaviour
         // testing and if player ever wants to restart the game.
         _update_tick_timer = 0;
         game_timer = 0;
-        _max_time_for_level = 500;
+        _max_time_for_level = 100;
         points = 0;
         _max_points_for_level = 500;
         UnPause();
@@ -60,6 +62,7 @@ public class MainGameHandler : MonoBehaviour
     void Update()
     {
         state_handler.gtext.text = (_max_time_for_level - game_timer).ToString();
+        score_text.text = "Score: " + (score).ToString();
 
         if (_paused) { return; } 
 
@@ -104,14 +107,13 @@ public class MainGameHandler : MonoBehaviour
     {
         Debug.Log("Shrink");
         
-        //Debug.Log("BIGGER!");
         Vector3 temp_bubble_visual = bubble_visual.transform.localScale - _scale_reduction;
         bubble_visual.transform.localScale = new Vector3(temp_bubble_visual.x,
                                                          temp_bubble_visual.y,
                                                          temp_bubble_visual.z);
     }
 
-    private void ShrinkBubble()
+    public void ShrinkBubble()
     {
         ShrinkBubbleByTime();
 

@@ -32,23 +32,27 @@ public class Hand : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        //Debug.Log("Curr Time = " + heal_time);
 
+        // check if the player is currently holding a bubble
         if (held && bubble != null) {
+            // wait for player to transform bubble in their entirety
             ++heal_time;
-            float t = heal_time / 3000.0f;
+            float t = heal_time / 200.0f;
             t = Mathf.Clamp(t, 0, 1);
-            bubble.GetComponent<Renderer>().material.color = Color.Lerp(bubble.GetComponent<Renderer>().material.color, new Color(0, 0, 3, 0.3f), t);
+            bubble.GetComponent<Renderer>().material.color = Color.Lerp(bubble.GetComponent<Renderer>().material.color, 
+                                                                        new Color(0, 0, 3, 0.3f), 
+                                                                        t);
 
+            // once bubble is completely blue, healing is complete!
             if (bubble.GetComponent<Renderer>().material.color == new Color(0, 0, 3, 0.3f)) {
                 Debug.Log("HEAL COMPLETE!");
+                MainGameHandler.score += 100;
                 heal_time = 0;
                 heal_complete = true;
                 held = false;
                 AudioSource.PlayClipAtPoint(heal_sound, new Vector3(0, 3, 0));
             }
         }
-
 
         // down 
         if (grab_action.GetStateDown(pose.inputSource)) {
@@ -61,17 +65,14 @@ public class Hand : MonoBehaviour
         // up
         if (grab_action.GetStateUp(pose.inputSource)) {
             //Debug.Log(pose.inputSource + " Trigger Released");
-            if (heal_time < 300) {
-                //Debug.Log("TOO EARLY");
-            } else {
-                //Debug.Log("GOOD!!!");
-            }
             held = false;
             heal_time = 0;
             bubble = null;
 
+            // if the bubble is released too early
             if (held_object && !heal_complete) {
                 AudioSource.PlayClipAtPoint(fail_sound, new Vector3(0, 3, 0));
+                MainGameHandler.score -= 50;
             }   
 
             Drop();
@@ -107,6 +108,22 @@ public class Hand : MonoBehaviour
     
         //already held check
         if (current_interactable.active_hand) current_interactable.active_hand.Drop();
+
+        // if left hand touches non-tagged fish, fail and drop fish
+        if ((pose.inputSource == SteamVR_Input_Sources.LeftHand) && !current_interactable.gameObject.CompareTag("TAGGED") ) {
+            AudioSource.PlayClipAtPoint(fail_sound, new Vector3(0, 3, 0));
+            current_interactable.active_hand.Drop();
+            MainGameHandler.score -= 5;
+            return;
+        }
+
+        // if right hand touches non-sick fish, fail and drop fish
+        if ((pose.inputSource == SteamVR_Input_Sources.RightHand) && !current_interactable.gameObject.CompareTag("SICK") ) {
+            AudioSource.PlayClipAtPoint(fail_sound, new Vector3(0, 3, 0));
+            current_interactable.active_hand.Drop();
+            MainGameHandler.score -= 5;
+            return;
+        }
 
         // position
         current_interactable.transform.position = transform.position;
