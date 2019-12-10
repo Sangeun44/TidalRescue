@@ -81,7 +81,9 @@ public class Hand : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if (!other.gameObject.CompareTag("TAGGED") 
-                && !other.gameObject.CompareTag("SICK")) {
+                && !other.gameObject.CompareTag("SICK")
+                  && !other.gameObject.CompareTag("TRASH")
+                  ) {
             return;
         }
         contacted.Add(other.gameObject.GetComponent<Interactable>());
@@ -90,7 +92,9 @@ public class Hand : MonoBehaviour
 
     private void OnTriggerExit(Collider other) {
         if (!other.gameObject.CompareTag("TAGGED") 
-                && !other.gameObject.CompareTag("SICK")) {
+                && !other.gameObject.CompareTag("SICK")
+                      && !other.gameObject.CompareTag("TRASH"))
+        {
             return;
         }
         contacted.Remove(other.gameObject.GetComponent<Interactable>());

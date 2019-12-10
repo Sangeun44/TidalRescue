@@ -13,7 +13,7 @@ public class MainGameHandler : MonoBehaviour
     private int _max_points_for_level = 500;
 
     // do not reduce vertical so person still has room to stand
-    private Vector3 _scale_reduction = new Vector3(0.1f, 0.1f, 0.1f);
+    private Vector3 _scale_reduction = new Vector3(0.2f, 0.2f, 0.2f);
 
     public GameObject bubble_visual;
     public StateHandler state_handler;
@@ -135,13 +135,14 @@ public class MainGameHandler : MonoBehaviour
         if (game_timer > _max_time_for_level)
         {
             Debug.Log("YOU DIED");
+            gtext.text = "GAMEOVER";
             state_handler.SetState(GameState.GAMEOVER);
         }
-        if (points >= _max_points_for_level)
-        {
-            Debug.Log("LEVEL COMPLETE!");
-            state_handler.SetState(GameState.STARTSCREEN);
-        }
+        //if (points >= _max_points_for_level)
+        //{
+        //    Debug.Log("LEVEL COMPLETE!");
+        //    state_handler.SetState(GameState.STARTSCREEN);
+        //}
 
         ShrinkBubbleByTime();
     }

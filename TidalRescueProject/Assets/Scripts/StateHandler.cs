@@ -65,8 +65,6 @@ public class StateHandler : MonoBehaviour
 
     public void SetState(GameState new_state)
     {
-        // TODO: handle state changes appropriately
-
         var old_state = current_state;
         if (old_state == GameState.STARTSCREEN)
         {
@@ -82,9 +80,6 @@ public class StateHandler : MonoBehaviour
                 Debug.Log("SWITCHING TO : START SCREEN");
                 start_scene_handler.Reset();
                 break;
-            // case GameState.TUTORIAL:
-            // Debug.Log("TUTORIAL");
-            // break;
             case GameState.PLAYING:
                 Debug.Log("SWITCHING TO : PLAYING");
                 main_game.SetUpGame();
@@ -93,7 +88,7 @@ public class StateHandler : MonoBehaviour
             case GameState.GAMEOVER:
                 Debug.Log("SWITCHING TO : GAMEOVER");
                 main_game.Pause();
-                gtext.text = "GAME-OVER";
+                main_game.score_text.text = "GAME-OVER";
                 break;
             default:
                 Debug.Log("Default case. ERROR: SHOULD NEVER HIT THIS.");
