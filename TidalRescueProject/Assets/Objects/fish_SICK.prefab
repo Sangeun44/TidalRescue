@@ -104,7 +104,6 @@ GameObject:
   - component: {fileID: 2148266454803033330}
   - component: {fileID: 261894588545440949}
   - component: {fileID: 176269441585224479}
-  - component: {fileID: 2771372482035567017}
   - component: {fileID: -4268613119923553185}
   - component: {fileID: -539861701568142093}
   - component: {fileID: -3447883585151658726}
@@ -190,22 +189,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2771372482035567017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8446347175127378918}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 636512187b345904ea633f84ad4223cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animal_type: 0
-  attribute_type: 0
-  point_value: 0
-  visual: {fileID: 0}
 --- !u!114 &-4268613119923553185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +218,8 @@ MonoBehaviour:
   speed: 0
   came_close: 0
   end_pos: {x: 0, y: 0, z: 0}
+  dir: {x: 0, y: 0, z: 0}
+  rotationSpeed: 1
 --- !u!54 &-3447883585151658726
 Rigidbody:
   m_ObjectHideFlags: 0

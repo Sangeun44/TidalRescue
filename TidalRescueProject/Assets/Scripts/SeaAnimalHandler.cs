@@ -29,7 +29,7 @@ public class SeaAnimalHandler : MonoBehaviour
     public GameObject taggedTurtle;
 
 
-    private int spawnMod = 5; // every 5 seconds.
+    private int spawnMod = 30; // every 5 seconds.
 
     void Start()
     {
@@ -38,34 +38,33 @@ public class SeaAnimalHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject[] tagges = GameObject.FindGameObjectsWithTag("TAGGED");
-        GameObject[] sicks = GameObject.FindGameObjectsWithTag("SICK");
+        // GameObject[] tagges = GameObject.FindGameObjectsWithTag("TAGGED");
+        // GameObject[] sicks = GameObject.FindGameObjectsWithTag("SICK");
 
-        if (main_game_handler.game_timer % spawnMod == 0 && main_game_handler.game_started
-            && (tagges.Length < 10)&&(sicks.Length < 10))
-        {
+        if (main_game_handler.game_timer % spawnMod == 0 && main_game_handler.game_started) {
             Debug.Log("game spawning animals");
 
             // add new sea animal
             Vector2 random = Random.insideUnitCircle;
-            //Debug.Log(random);
-            SeaAnimal temp = new SeaAnimal(); //create new sea animal
+            // SeaAnimal temp = new SeaAnimal(); //create new sea animal
+            AnimalType animal_ran =(AnimalType) Random.Range(0,(float)AnimalType.NUM_ANIMALTYPES);
+            AttributeType attribute_ran =(AttributeType) Random.Range(0,(float)AttributeType.NUM_ATTRIBUTETYPES);
 
             ////set up sea animal
-            temp.Setup(
-                (AnimalType)(random.x * (float)AnimalType.NUM_ANIMALTYPES),
-                (AttributeType)(random.y * (float)AttributeType.NUM_ATTRIBUTETYPES)
-            );
+            // AnimalType animal = (AnimalType)(random.x * (float)AnimalType.NUM_ANIMALTYPES);
+            // AttributeType attribute = (AttributeType)(random.x * (float)AttributeType.NUM_ATTRIBUTETYPES);
+            
+            Debug.Log("r");
 
+            Vector2 random2 = Random.insideUnitCircle;
 
-
-            switch (temp.animal_type)
+            switch (animal_ran)
             {
                 case AnimalType.FISH:
-                    if (temp.attribute_type == AttributeType.SICK)
+                    if (attribute_ran == AttributeType.SICK)
                     {
                         //sick fish  
-                        Vector3 position = new Vector3(random.x * 20, 1, random.y * 20);
+                        Vector3 position = new Vector3(random2.x * 20, 1, random2.y * 20);
                         GameObject fish_sick = Instantiate(sickFish, position, Quaternion.identity);
 
                         Vector3 relativePos = Vector3.zero - position;
@@ -73,23 +72,24 @@ public class SeaAnimalHandler : MonoBehaviour
               
                         fish_sick.gameObject.tag = "SICK";
                     }
-                    else if (temp.attribute_type == AttributeType.TAGGED)
+                    else if (attribute_ran == AttributeType.TAGGED)
                     {
                         //tagge fish
-                        Vector3 position = new Vector3(random.x * 20, 1, random.y *20);
+                        Vector3 position = new Vector3(random2.x * 20, 1, random2.y *20);
                         GameObject fish_tag = Instantiate(taggedFish, position, Quaternion.identity);
 
                         Vector3 relativePos = Vector3.zero - position;
                         fish_tag.transform.rotation = Quaternion.LookRotation(relativePos, Vector3.up);
 
                         fish_tag.gameObject.tag = "TAGGED";
+                        Debug.Log("TAGGED FISH!!!!!!!!!!");
                     }
                     break;
                 case AnimalType.TURTLE:
-                    if (temp.attribute_type == AttributeType.SICK)
+                    if (attribute_ran == AttributeType.SICK)
                     {
                         //sick turtle  
-                        Vector3 position = new Vector3(random.x * 3, -0.5f, random.y * 3);
+                        Vector3 position = new Vector3(random2.x * 3, 0, random2.y * 3);
                         GameObject turtle_sick = Instantiate(sickTurtle, position, Quaternion.identity);
 
                         Vector3 relativePos = Vector3.zero - position;
@@ -97,10 +97,10 @@ public class SeaAnimalHandler : MonoBehaviour
 
                         turtle_sick.gameObject.tag = "SICK";
                     }
-                    else if (temp.attribute_type == AttributeType.TAGGED)
+                    else if (attribute_ran == AttributeType.TAGGED)
                     {
                         //tagge turtle
-                        Vector3 position = new Vector3(random.x * 3, -0.5f, random.y * 3);
+                        Vector3 position = new Vector3(random2.x * 3, 0, random2.y * 3);
                         GameObject turtle_tag = Instantiate(taggedTurtle, position, Quaternion.identity);
 
                         Vector3 relativePos = Vector3.zero - position;

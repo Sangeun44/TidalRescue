@@ -28,6 +28,6 @@ public class SeaAnimal : MonoBehaviour
     void Update()
     {
         // MOVE RANDOMLY
-        visual.transform.position += new Vector3(1, 1, 1);
+        // visual.transform.position += new Vector3(1, 1, 1);
     }
 }

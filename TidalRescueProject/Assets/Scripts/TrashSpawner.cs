@@ -52,14 +52,12 @@ public class TrashSpawner : MonoBehaviour
             // add new sea animal
             Vector2 random = Random.insideUnitCircle;
             //Debug.Log(random);
-            Trash temp = new Trash(); //create new sea animal
+            // Trash temp = new Trash(); //create new sea animal
 
             ////set up sea animal
-            temp.Setup(
-                (TrashType)(random.x * (float)TrashType.NUM_TRASHTYPE)
-            );
-
+            TrashType trash = (TrashType)(random.x * (float)TrashType.NUM_TRASHTYPE);
             Vector3 position = new Vector3(random.x * 3, 0, random.y * 3);
+
             float EPSILON = 0;
             if (System.Math.Abs(position.x) < EPSILON)
             {
@@ -69,7 +67,7 @@ public class TrashSpawner : MonoBehaviour
                 position.z = 1;
             }
 
-            switch (temp.trash_type)
+            switch (trash)
             {
                 case TrashType.CAN1:                    
                      GameObject can_go = Instantiate(can1, position, Quaternion.identity);

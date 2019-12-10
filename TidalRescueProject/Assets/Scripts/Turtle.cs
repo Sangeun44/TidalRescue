@@ -26,13 +26,10 @@ public class Turtle : MonoBehaviour
             ran_x = 1;
         if (ran_y == 0)
             ran_y = 0;
-        end_pos = new Vector3(ran_x * 50, -.5f, ran_y * 40);
+        end_pos = new Vector3(ran_x * 50, 1.0f, ran_y * 40);
 
     }
 
-    public void Setup(AnimalType animal, AttributeType attribute)
-    {
-    }
 
     void collisionEnter(Collision collision)
     {
@@ -58,7 +55,7 @@ public class Turtle : MonoBehaviour
         if (transform.position.x > 0.1 && !came_close)
         {
             //if fish is far, move it towars the player
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, -0.5f, 0), step);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, 0.01f, 0), step);
         }
         else if (transform.position.x <= 0.1 && !came_close)
         {

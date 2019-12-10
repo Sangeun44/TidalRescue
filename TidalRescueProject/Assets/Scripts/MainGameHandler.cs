@@ -42,7 +42,7 @@ public class MainGameHandler : MonoBehaviour
         // testing and if player ever wants to restart the game.
         _update_tick_timer = 0;
         game_timer = 0;
-        _max_time_for_level = 100;
+        _max_time_for_level = 300;
         points = 0;
         _max_points_for_level = 500;
         UnPause();

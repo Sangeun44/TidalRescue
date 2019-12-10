@@ -82,8 +82,7 @@ public class Hand : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (!other.gameObject.CompareTag("TAGGED") 
                 && !other.gameObject.CompareTag("SICK")
-                  && !other.gameObject.CompareTag("TRASH")
-                  ) {
+                  && !other.gameObject.CompareTag("TRASH")) {
             return;
         }
         contacted.Add(other.gameObject.GetComponent<Interactable>());
@@ -113,16 +112,16 @@ public class Hand : MonoBehaviour
         //already held check
         if (current_interactable.active_hand) current_interactable.active_hand.Drop();
 
-        // if left hand touches non-tagged fish, fail and drop fish
-        if ((pose.inputSource == SteamVR_Input_Sources.LeftHand) && !current_interactable.gameObject.CompareTag("TAGGED") ) {
+        // if left hand touches sick fish, fail and drop fish
+        if ((pose.inputSource == SteamVR_Input_Sources.LeftHand) && current_interactable.gameObject.CompareTag("SICK") ) {
             AudioSource.PlayClipAtPoint(fail_sound, new Vector3(0, 3, 0));
             current_interactable.active_hand.Drop();
             MainGameHandler.score -= 5;
             return;
         }
 
-        // if right hand touches non-sick fish, fail and drop fish
-        if ((pose.inputSource == SteamVR_Input_Sources.RightHand) && !current_interactable.gameObject.CompareTag("SICK") ) {
+        // if right hand touches tagged fish, fail and drop fish
+        if ((pose.inputSource == SteamVR_Input_Sources.RightHand) && current_interactable.gameObject.CompareTag("TAGGED") ) {
             AudioSource.PlayClipAtPoint(fail_sound, new Vector3(0, 3, 0));
             current_interactable.active_hand.Drop();
             MainGameHandler.score -= 5;
