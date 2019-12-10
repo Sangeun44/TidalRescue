@@ -13,7 +13,7 @@ public class MainGameHandler : MonoBehaviour
     private int _max_points_for_level = 500;
 
     // do not reduce vertical so person still has room to stand
-    private Vector3 _scale_reduction = new Vector3(0.2f, 0.2f, 0.2f);
+    private Vector3 _scale_reduction = new Vector3(0.05f, 0.05f, 0.05f);
 
     public GameObject bubble_visual;
     public StateHandler state_handler;
