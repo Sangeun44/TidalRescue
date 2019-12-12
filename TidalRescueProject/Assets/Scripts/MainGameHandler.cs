@@ -107,10 +107,16 @@ public class MainGameHandler : MonoBehaviour
         Debug.Log("Shrink");
         
         Vector3 temp_bubble_visual = bubble_visual.transform.localScale - _scale_reduction;
+        temp_bubble_visual.x = temp_bubble_visual.x < 0 ? 0 : temp_bubble_visual.x;
+        temp_bubble_visual.y = temp_bubble_visual.y < 0 ? 0 : temp_bubble_visual.y;
+        temp_bubble_visual.z = temp_bubble_visual.z < 0 ? 0 : temp_bubble_visual.z;
         bubble_visual.transform.localScale = new Vector3(temp_bubble_visual.x,
                                                          temp_bubble_visual.y,
                                                          temp_bubble_visual.z);
         Vector3 temp_bubble_floor_visual = bubble_floor_visual.transform.localScale - _scale_reduction_floor;
+        temp_bubble_floor_visual.x = temp_bubble_floor_visual.x < 0 ? 0 : temp_bubble_floor_visual.x;
+        temp_bubble_floor_visual.y = temp_bubble_floor_visual.y < 0 ? 0 : temp_bubble_floor_visual.y;
+        temp_bubble_floor_visual.z = temp_bubble_floor_visual.z < 0 ? 0 : temp_bubble_floor_visual.z;
         bubble_floor_visual.transform.localScale = new Vector3(temp_bubble_floor_visual.x,
                                                          temp_bubble_floor_visual.y,
                                                          temp_bubble_floor_visual.z);
@@ -133,6 +139,8 @@ public class MainGameHandler : MonoBehaviour
         bubble_floor_visual.transform.localScale = new Vector3(temp_bubble_floor_visual.x,
                                                          temp_bubble_floor_visual.y,
                                                          temp_bubble_floor_visual.z);
+
+
         game_timer -= 5;
     }
 
