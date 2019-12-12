@@ -13,9 +13,11 @@ public class MainGameHandler : MonoBehaviour
     private int _max_points_for_level = 500;
 
     // do not reduce vertical so person still has room to stand
-    private Vector3 _scale_reduction = new Vector3(0.05f, 0.05f, 0.05f);
+    private Vector3 _scale_reduction = new Vector3(0.05f, 0.0f, 0.05f);
+    private Vector3 _scale_reduction_floor = new Vector3(0.05f, 0.05f, 0.05f);
 
     public GameObject bubble_visual;
+    public GameObject bubble_floor_visual;
     public StateHandler state_handler;
 
     private int _update_tick_timer = 0; // ticked every update. used for modding game_timer
@@ -26,9 +28,6 @@ public class MainGameHandler : MonoBehaviour
     public int points = 0;
 
     private bool _paused = false;
-
-    private int sick_points = 15;
-    private int tagged_points = 10;
 
     void Start()
     {
@@ -111,6 +110,10 @@ public class MainGameHandler : MonoBehaviour
         bubble_visual.transform.localScale = new Vector3(temp_bubble_visual.x,
                                                          temp_bubble_visual.y,
                                                          temp_bubble_visual.z);
+        Vector3 temp_bubble_floor_visual = bubble_floor_visual.transform.localScale - _scale_reduction_floor;
+        bubble_floor_visual.transform.localScale = new Vector3(temp_bubble_floor_visual.x,
+                                                         temp_bubble_floor_visual.y,
+                                                         temp_bubble_floor_visual.z);
     }
 
     public void ShrinkBubble()
@@ -126,6 +129,10 @@ public class MainGameHandler : MonoBehaviour
         bubble_visual.transform.localScale = new Vector3(temp_bubble_visual.x,
                                                          temp_bubble_visual.y,
                                                          temp_bubble_visual.z);
+        Vector3 temp_bubble_floor_visual = bubble_floor_visual.transform.localScale + _scale_reduction_floor;
+        bubble_floor_visual.transform.localScale = new Vector3(temp_bubble_floor_visual.x,
+                                                         temp_bubble_floor_visual.y,
+                                                         temp_bubble_floor_visual.z);
         game_timer -= 5;
     }
 
