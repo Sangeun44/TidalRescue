@@ -120,7 +120,7 @@ public class MainGameHandler : MonoBehaviour
         game_timer += 5;
     }
 
-    private void IncreaseBubble()
+    public void IncreaseBubble()
     {
         Vector3 temp_bubble_visual = bubble_visual.transform.localScale + _scale_reduction;
         bubble_visual.transform.localScale = new Vector3(temp_bubble_visual.x,

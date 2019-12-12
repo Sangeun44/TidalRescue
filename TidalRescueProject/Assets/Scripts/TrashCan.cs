@@ -26,7 +26,8 @@ public class TrashCan : MonoBehaviour
         {
             //If the GameObject's name matches the one you suggest, output this message in the console
             Debug.Log("trash tecte");
-            MainGameHandler.score += 10; //increase points
+            main_game_handler.points += 10; //increase points
+            main_game_handler.IncreaseBubble();
             Destroy(collision.gameObject);
 
         }

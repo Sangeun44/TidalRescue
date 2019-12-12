@@ -50,12 +50,6 @@ public class SeaAnimalHandler : MonoBehaviour
             AnimalType animal_ran =(AnimalType) Random.Range(0,(float)AnimalType.NUM_ANIMALTYPES);
             AttributeType attribute_ran =(AttributeType) Random.Range(0,(float)AttributeType.NUM_ATTRIBUTETYPES);
 
-            ////set up sea animal
-            // AnimalType animal = (AnimalType)(random.x * (float)AnimalType.NUM_ANIMALTYPES);
-            // AttributeType attribute = (AttributeType)(random.x * (float)AttributeType.NUM_ATTRIBUTETYPES);
-            
-            Debug.Log("r");
-
             Vector2 random2 = Random.insideUnitCircle;
 
             switch (animal_ran)
@@ -82,14 +76,13 @@ public class SeaAnimalHandler : MonoBehaviour
                         fish_tag.transform.rotation = Quaternion.LookRotation(relativePos, Vector3.up);
 
                         fish_tag.gameObject.tag = "TAGGED";
-                        Debug.Log("TAGGED FISH!!!!!!!!!!");
                     }
                     break;
                 case AnimalType.TURTLE:
                     if (attribute_ran == AttributeType.SICK)
                     {
                         //sick turtle  
-                        Vector3 position = new Vector3(random2.x * 3, 0, random2.y * 3);
+                        Vector3 position = new Vector3(random2.x * 3, 0.1f, random2.y * 3);
                         GameObject turtle_sick = Instantiate(sickTurtle, position, Quaternion.identity);
 
                         Vector3 relativePos = Vector3.zero - position;
@@ -100,7 +93,7 @@ public class SeaAnimalHandler : MonoBehaviour
                     else if (attribute_ran == AttributeType.TAGGED)
                     {
                         //tagge turtle
-                        Vector3 position = new Vector3(random2.x * 3, 0, random2.y * 3);
+                        Vector3 position = new Vector3(random2.x * 3, 0.1f, random2.y * 3);
                         GameObject turtle_tag = Instantiate(taggedTurtle, position, Quaternion.identity);
 
                         Vector3 relativePos = Vector3.zero - position;

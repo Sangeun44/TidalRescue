@@ -6,6 +6,7 @@ using Valve.VR;
 public class Hand : MonoBehaviour
 {
     // checking pick up/drop
+    public MainGameHandler mainGameHandler;
     public SteamVR_Action_Boolean grab_action = null;
     public AudioClip heal_sound;
     public AudioClip fail_sound;
@@ -46,7 +47,8 @@ public class Hand : MonoBehaviour
             // once bubble is completely blue, healing is complete!
             if (bubble.GetComponent<Renderer>().material.color == new Color(0, 0, 3, 0.3f)) {
                 Debug.Log("HEAL COMPLETE!");
-                MainGameHandler.score += 100;
+                mainGameHandler.points += 100;
+                mainGameHandler.IncreaseBubble();
                 heal_time = 0;
                 heal_complete = true;
                 held = false;
@@ -72,8 +74,9 @@ public class Hand : MonoBehaviour
             // if the bubble is released too early
             if (held_object && !heal_complete) {
                 AudioSource.PlayClipAtPoint(fail_sound, new Vector3(0, 3, 0));
-                MainGameHandler.score -= 50;
-            }   
+                mainGameHandler.points -= 50;
+                mainGameHandler.ShrinkBubble();
+            }
 
             Drop();
         }
@@ -116,7 +119,9 @@ public class Hand : MonoBehaviour
         if ((pose.inputSource == SteamVR_Input_Sources.LeftHand) && current_interactable.gameObject.CompareTag("SICK") ) {
             AudioSource.PlayClipAtPoint(fail_sound, new Vector3(0, 3, 0));
             current_interactable.active_hand.Drop();
-            MainGameHandler.score -= 5;
+            mainGameHandler.points -= 5;
+            mainGameHandler.ShrinkBubble();
+
             return;
         }
 
@@ -124,7 +129,8 @@ public class Hand : MonoBehaviour
         if ((pose.inputSource == SteamVR_Input_Sources.RightHand) && current_interactable.gameObject.CompareTag("TAGGED") ) {
             AudioSource.PlayClipAtPoint(fail_sound, new Vector3(0, 3, 0));
             current_interactable.active_hand.Drop();
-            MainGameHandler.score -= 5;
+            mainGameHandler.points -= 5;
+            mainGameHandler.ShrinkBubble();
             return;
         }
 
