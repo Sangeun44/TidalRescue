@@ -22,6 +22,7 @@ public class Hand : MonoBehaviour
     private bool held = false;
     private GameObject bubble = null;
     private bool heal_complete = false;
+    // private bool isTrash=false;
 
     // Start is called before the first frame update
     private void Awake()
@@ -140,7 +141,11 @@ public class Hand : MonoBehaviour
         // attach
         Rigidbody target = current_interactable.GetComponent<Rigidbody>();
         joint.connectedBody = target;
-        bubble = current_interactable.gameObject.transform.GetChild(0).gameObject;
+
+        if( !current_interactable.gameObject.CompareTag("TRASH") ) {
+            bubble = current_interactable.gameObject.transform.GetChild(0).gameObject;
+        }
+
 
         // set active hand
         current_interactable.active_hand = this;

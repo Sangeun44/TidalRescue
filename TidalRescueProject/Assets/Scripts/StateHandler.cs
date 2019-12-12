@@ -55,6 +55,7 @@ public class StateHandler : MonoBehaviour
                 //Debug.Log("playing");
                 break;
             case GameState.GAMEOVER:
+                
                // Debug.Log("GAMEOVER");
                 break;
             default:
@@ -88,6 +89,7 @@ public class StateHandler : MonoBehaviour
             case GameState.GAMEOVER:
                 Debug.Log("SWITCHING TO : GAMEOVER");
                 main_game.Pause();
+                main_game.game_started = false;
                 main_game.score_text.text = "GAME-OVER";
                 break;
             default:

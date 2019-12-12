@@ -45,7 +45,7 @@ public class TrashSpawner : MonoBehaviour
     {
         GameObject[] respawns = GameObject.FindGameObjectsWithTag("TRASH");
         if (main_game_handler.game_timer % spawnMod == 0 && main_game_handler.game_started
-            && respawns.Length < 5)
+            && respawns.Length < 20)
         {
             Debug.Log("game spawning animals");
 
@@ -56,7 +56,7 @@ public class TrashSpawner : MonoBehaviour
 
             ////set up sea animal
             TrashType trash = (TrashType)(random.x * (float)TrashType.NUM_TRASHTYPE);
-            Vector3 position = new Vector3(random.x * 3, 0, random.y * 3);
+            Vector3 position = new Vector3(random.x * 2, 0, random.y * 2);
 
             float EPSILON = 0;
             if (System.Math.Abs(position.x) < EPSILON)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class TrashCan : MonoBehaviour
 {
     public MainGameHandler main_game_handler;
+    public AudioClip heal_sound;
 
 
     // Start is called before the first frame update
@@ -28,7 +29,10 @@ public class TrashCan : MonoBehaviour
             Debug.Log("trash tecte");
             main_game_handler.points += 10; //increase points
             main_game_handler.IncreaseBubble();
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
+            // Destroy(collision.gameObject);
+
+            AudioSource.PlayClipAtPoint(heal_sound, new Vector3(0, 3, 0));
 
         }
 

@@ -62,7 +62,7 @@ public class MainGameHandler : MonoBehaviour
     void Update()
     {
         state_handler.gtext.text = (_max_time_for_level - game_timer).ToString();
-        score_text.text = "Score: " + (score).ToString();
+        score_text.text = "Score: " + (points).ToString();
 
         if (_paused) { return; } 
 
@@ -136,6 +136,8 @@ public class MainGameHandler : MonoBehaviour
         {
             Debug.Log("YOU DIED");
             gtext.text = "GAMEOVER";
+            _paused = true;
+            game_started = false;
             state_handler.SetState(GameState.GAMEOVER);
         }
         //if (points >= _max_points_for_level)
