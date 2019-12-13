@@ -79,6 +79,11 @@ public class MainGameHandler : MonoBehaviour
     List<XRNodeState> nodeStatesCache = new List<XRNodeState>();
     private void CheckPlayerPos()
     {
+        if (_paused)
+        {
+            return;
+        }
+
         // circle of bubble: 
         // compare against center of sphere
 
@@ -93,8 +98,10 @@ public class MainGameHandler : MonoBehaviour
             }
         }
 
-        if (Vector2.Distance( new Vector2(hmd_pos.x, hmd_pos.y), new Vector2(0, 0)) < bubble_visual.transform.localScale.x / 1.5)
+        double temp = bubble_floor_visual.transform.localScale.x * 4;
+        if (Vector2.Distance( new Vector2(hmd_pos.x, hmd_pos.z), new Vector2(0, 0)) < temp )
         {
+            Debug.Log("WITHIN FINE: " + (Vector2.Distance(new Vector2(hmd_pos.x, hmd_pos.z), new Vector2(0, 0))) + " IS LESS THAN: " + temp);
             // within - fine
         } else
         {
@@ -107,16 +114,20 @@ public class MainGameHandler : MonoBehaviour
         Debug.Log("Shrink");
         
         Vector3 temp_bubble_visual = bubble_visual.transform.localScale - _scale_reduction;
-        temp_bubble_visual.x = temp_bubble_visual.x < 0 ? 0 : temp_bubble_visual.x;
-        temp_bubble_visual.y = temp_bubble_visual.y < 0 ? 0 : temp_bubble_visual.y;
-        temp_bubble_visual.z = temp_bubble_visual.z < 0 ? 0 : temp_bubble_visual.z;
+
+        if (temp_bubble_visual.x < 0 || temp_bubble_visual.y < 0 || temp_bubble_visual.z < 0)
+        {
+            state_handler.SetState(GameState.GAMEOVER);
+        }
+
         bubble_visual.transform.localScale = new Vector3(temp_bubble_visual.x,
                                                          temp_bubble_visual.y,
                                                          temp_bubble_visual.z);
         Vector3 temp_bubble_floor_visual = bubble_floor_visual.transform.localScale - _scale_reduction_floor;
-        temp_bubble_floor_visual.x = temp_bubble_floor_visual.x < 0 ? 0 : temp_bubble_floor_visual.x;
-        temp_bubble_floor_visual.y = temp_bubble_floor_visual.y < 0 ? 0 : temp_bubble_floor_visual.y;
-        temp_bubble_floor_visual.z = temp_bubble_floor_visual.z < 0 ? 0 : temp_bubble_floor_visual.z;
+        if (temp_bubble_floor_visual.x < 0 || temp_bubble_floor_visual.y < 0 || temp_bubble_floor_visual.z < 0)
+        {
+            state_handler.SetState(GameState.GAMEOVER);
+        }
         bubble_floor_visual.transform.localScale = new Vector3(temp_bubble_floor_visual.x,
                                                          temp_bubble_floor_visual.y,
                                                          temp_bubble_floor_visual.z);
@@ -124,6 +135,10 @@ public class MainGameHandler : MonoBehaviour
 
     public void ShrinkBubble()
     {
+        if (_paused)
+        {
+            return;
+        }
         ShrinkBubbleByTime();
 
         game_timer += 5;
@@ -131,6 +146,13 @@ public class MainGameHandler : MonoBehaviour
 
     public void IncreaseBubble()
     {
+        if (_paused)
+        {
+            return;
+        }
+
+        Debug.Log("Increase");
+
         Vector3 temp_bubble_visual = bubble_visual.transform.localScale + _scale_reduction;
         bubble_visual.transform.localScale = new Vector3(temp_bubble_visual.x,
                                                          temp_bubble_visual.y,
@@ -146,6 +168,11 @@ public class MainGameHandler : MonoBehaviour
 
     void HandleTimerUpdate()
     {
+        if (_paused)
+        {
+            return;
+        }
+
         // end game?
         if (game_timer > _max_time_for_level)
         {
@@ -166,8 +193,13 @@ public class MainGameHandler : MonoBehaviour
 
     public void HandleEvents()
     {
-        ViveInput left = state_handler.vive_input_left;
-        ViveInput right = state_handler.vive_input_right;
+        if (_paused)
+        {
+            return;
+        }
+
+        //ViveInput left = state_handler.vive_input_left;
+        //ViveInput right = state_handler.vive_input_right;
 
         // if (left.colliding_object)     
         // {
