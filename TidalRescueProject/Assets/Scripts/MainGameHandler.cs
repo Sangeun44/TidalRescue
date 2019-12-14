@@ -21,7 +21,7 @@ public class MainGameHandler : MonoBehaviour
     public StateHandler state_handler;
 
     private int _update_tick_timer = 0; // ticked every update. used for modding game_timer
-    private int _timer_mod = 30;
+    private int _timer_mod = 150;
 
     public int game_timer = 0;
     public bool game_started = false;
