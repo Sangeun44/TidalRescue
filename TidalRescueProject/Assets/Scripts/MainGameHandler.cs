@@ -13,7 +13,7 @@ public class MainGameHandler : MonoBehaviour
     private int _max_points_for_level = 500;
 
     // do not reduce vertical so person still has room to stand
-    private Vector3 _scale_reduction = new Vector3(0.05f, 0.0f, 0.05f);
+    private Vector3 _scale_reduction = new Vector3(0.4f, 0.0f, 0.4f);
     private Vector3 _scale_reduction_floor = new Vector3(0.05f, 0.05f, 0.05f);
 
     public GameObject bubble_visual;
@@ -101,7 +101,7 @@ public class MainGameHandler : MonoBehaviour
         double temp = bubble_floor_visual.transform.localScale.x * 4;
         if (Vector2.Distance( new Vector2(hmd_pos.x, hmd_pos.z), new Vector2(0, 0)) < temp )
         {
-            Debug.Log("WITHIN FINE: " + (Vector2.Distance(new Vector2(hmd_pos.x, hmd_pos.z), new Vector2(0, 0))) + " IS LESS THAN: " + temp);
+            //Debug.Log("WITHIN FINE: " + (Vector2.Distance(new Vector2(hmd_pos.x, hmd_pos.z), new Vector2(0, 0))) + " IS LESS THAN: " + temp);
             // within - fine
         } else
         {
@@ -123,6 +123,9 @@ public class MainGameHandler : MonoBehaviour
         bubble_visual.transform.localScale = new Vector3(temp_bubble_visual.x,
                                                          temp_bubble_visual.y,
                                                          temp_bubble_visual.z);
+
+        //Debug.Log("BUBBLE SCALE: " + bubble_visual.transform.localScale.x);
+
         Vector3 temp_bubble_floor_visual = bubble_floor_visual.transform.localScale - _scale_reduction_floor;
         if (temp_bubble_floor_visual.x < 0 || temp_bubble_floor_visual.y < 0 || temp_bubble_floor_visual.z < 0)
         {
@@ -131,6 +134,8 @@ public class MainGameHandler : MonoBehaviour
         bubble_floor_visual.transform.localScale = new Vector3(temp_bubble_floor_visual.x,
                                                          temp_bubble_floor_visual.y,
                                                          temp_bubble_floor_visual.z);
+
+        //Debug.Log("BUBBLE FLOOR SCALE: " + bubble_floor_visual.transform.localScale.x);
     }
 
     public void ShrinkBubble()
