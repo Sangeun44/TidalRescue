@@ -43,6 +43,11 @@ public class TrashSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (main_game_handler._paused)
+        {
+            return;
+        }
+
         GameObject[] respawns = GameObject.FindGameObjectsWithTag("TRASH");
         if (main_game_handler.game_timer % spawnMod == 0 && main_game_handler.game_started
             && respawns.Length < 20)

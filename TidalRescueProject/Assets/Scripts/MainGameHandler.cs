@@ -5,7 +5,7 @@ using UnityEngine.XR;
 
 public class MainGameHandler : MonoBehaviour
 {
-    public TextMesh gtext;
+    public TextMesh timer_text;
     public TextMesh score_text;
     public static int score = 0;
 
@@ -27,7 +27,7 @@ public class MainGameHandler : MonoBehaviour
     public bool game_started = false;
     public int points = 0;
 
-    private bool _paused = false;
+    public bool _paused = false;
 
     void Start()
     {
@@ -60,7 +60,7 @@ public class MainGameHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        state_handler.gtext.text = (_max_time_for_level - game_timer).ToString();
+        timer_text.text = (_max_time_for_level - game_timer).ToString();
         score_text.text = "Score: " + (points).ToString();
 
         if (_paused) { return; } 
@@ -182,7 +182,6 @@ public class MainGameHandler : MonoBehaviour
         if (game_timer > _max_time_for_level)
         {
             Debug.Log("YOU DIED");
-            gtext.text = "GAMEOVER";
             _paused = true;
             game_started = false;
             state_handler.SetState(GameState.GAMEOVER);

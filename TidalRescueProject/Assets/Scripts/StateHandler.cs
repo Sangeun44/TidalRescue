@@ -17,6 +17,8 @@ public enum GameState
 public class StateHandler : MonoBehaviour
 {
     public TextMesh gtext;
+    public TextMesh gtext2;
+    public TextMesh gtext3;
 
     public GameState current_state;
     public ViveInput vive_input_left;
@@ -88,9 +90,12 @@ public class StateHandler : MonoBehaviour
                 break;
             case GameState.GAMEOVER:
                 Debug.Log("SWITCHING TO : GAMEOVER");
+                //main_game.score_text.text = "GAME-OVER";
+                gtext.text = "!!GAME OVER!!";
+                gtext2.text = "!!GAME OVER!!";
+                gtext3.text = "!!GAME OVER!!";
                 main_game.Pause();
                 main_game.game_started = false;
-                main_game.score_text.text = "GAME-OVER";
                 break;
             default:
                 Debug.Log("Default case. ERROR: SHOULD NEVER HIT THIS.");

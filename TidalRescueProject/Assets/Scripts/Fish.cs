@@ -30,19 +30,10 @@ public class Fish : MonoBehaviour
 
     }
 
-    public void Setup(AnimalType animal, AttributeType attribute)
-    {
-    }
-
-    void collisionEnter (Collision collision) {
-
-    }
-
 
     // Update is called once per frame
     void Update()
     {
-
         if (dir != Vector3.zero) {
             transform.rotation = Quaternion.Slerp(
             transform.rotation,

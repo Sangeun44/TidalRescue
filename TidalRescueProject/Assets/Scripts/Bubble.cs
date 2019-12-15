@@ -5,7 +5,6 @@ using UnityEngine;
 public class Bubble : MonoBehaviour
 {
     public int speed;
-    private Vector3 _scale_reduction = new Vector3(0.1f, 0, 0.1f);
 
     // Start is called before the first frame update
     void Start()

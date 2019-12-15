@@ -29,7 +29,7 @@ public class SeaAnimalHandler : MonoBehaviour
     public GameObject taggedTurtle;
 
 
-    private int spawnMod = 30; // every 5 seconds.
+    private int spawnMod = 10; // ~ every 5 seconds.
 
     void Start()
     {
@@ -40,6 +40,11 @@ public class SeaAnimalHandler : MonoBehaviour
     {
         // GameObject[] tagges = GameObject.FindGameObjectsWithTag("TAGGED");
         // GameObject[] sicks = GameObject.FindGameObjectsWithTag("SICK");
+
+        if (main_game_handler._paused)
+        {
+            return;
+        }
 
         if (main_game_handler.game_timer % spawnMod == 0 && main_game_handler.game_started) {
             Debug.Log("game spawning animals");
